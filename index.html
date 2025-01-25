@@ -142,38 +142,86 @@
         }
 
         .screenshot-gallery {
-            height: 400px;
+            position: relative;
             border-radius: 0.75rem;
             overflow: hidden;
-            position: relative;
+            height: 300px;
+            background: rgba(30, 41, 59, 0.5);
         }
-
-        .gallery-controls {
-            position: absolute;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
+        
+        .screenshot-gallery .swiper-slide {
             display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .screenshot-gallery .swiper-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        .screenshot-gallery .swiper-slide-active img {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .screenshot-gallery .swiper-slide:not(.swiper-slide-active) img {
+            transform: scale(0.9);
+            opacity: 0.7;
+        }
+        
+        .gallery-thumbnails {
+            display: flex;
+            justify-content: center;
             gap: 0.5rem;
-            z-index: 10;
+            margin-top: 1rem;
         }
-
-        .gallery-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            width: 40px;
+        
+        .gallery-thumbnail {
+            width: 60px;
             height: 40px;
-            border-radius: 50%;
-            color: var(--text);
-            display: flex;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            object-fit: cover;
+            border: 2px solid transparent;
+        }
+        
+        .gallery-thumbnail:hover,
+        .gallery-thumbnail.active {
+            opacity: 1;
+            border-color: var(--primary);
+        }
+        
+        .gallery-fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            display: none;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-
-        .gallery-btn:hover {
-            background: var(--primary);
-            transform: scale(1.1);
+        
+        .gallery-fullscreen-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .gallery-fullscreen-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
         }
 
         .thumbnail-container {
@@ -268,63 +316,246 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-5">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="glass-card">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <p class="lead mb-4">Passionate developer specializing in building immersive digital experiences. Currently pursuing my bachelor's degree while working on cutting-edge web and mobile applications.</p>
-                            <p class="mb-0">With 2+ years of hands-on experience in full-stack development, I create robust solutions using modern technologies like React, Node.js, and Firebase. Committed to continuous learning and solving complex problems through innovative code.</p>
+<!-- About Section -->
+<section id="about" class="py-5">
+    <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="glass-card">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <p class="lead mb-4">I am a dedicated IT student and full-stack developer with a passion for creating innovative digital solutions that bridge technology and user experience. My academic and professional journey is characterized by a commitment to continuous learning and technological excellence.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="fw-bold mb-3">Professional Focus</h5>
+                            <p>Specializing in full-stack development, I leverage modern technologies to build robust, scalable applications. My expertise spans mobile and web development, with a particular emphasis on creating intuitive, high-performance digital experiences.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="fw-bold mb-3">Technical Approach</h5>
+                            <p>I approach each project with a strategic mindset, combining technical proficiency with creative problem-solving. My development philosophy centers on writing clean, efficient code and delivering solutions that exceed client expectations.</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="py-5">
-            <div class="container">
-                <h2 class="section-title">Projects</h2>
-                <div class="swiper project-swiper">
-                    <div class="swiper-wrapper">
-                        <!-- Project Slide -->
-                        <div class="swiper-slide">
-                            <div class="project-card">
-                                <div class="card-body p-4">
-                                    <h5 class="fw-bold mb-3">ChatFlare</h5>
-                                    <p class="mb-4" style="color: var(--text)">Android-based social platform connecting users worldwide with real-time messaging and Firebase integration.</p>                                    <div class="screenshot-gallery">
-                                        <div class="swiper gallery-main">
-                                            <div class="swiper-wrapper">
-                                                <div class="swiper-slide">
-                                                <img src="src/photo/login.png" class="img-fluid" alt="Chatflare Login">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="src/photo/landingpage.png" class="img-fluid" alt="Chat Interface">
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="src/photo/chat.png" class="img-fluid" alt="User Profile">
-                                            </div>   
-                                        </div>                                         </div>
-                                        </div>
-                                        <div class="gallery-controls">
-                                            <button class="gallery-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
-                                            <button class="gallery-btn next-btn"><i class="fas fa-chevron-right"></i></button>
-                                        </div>
-                                    </div>
-                                    <div class="mt-3">
-                                        <a href="appfile/chatFlare.apk" class="btn btn-primary mt-3" download>
-                                            <i class="fas fa-download me-2"></i>Download APK
-                                        </a>
-                                    </div>
+                    <div class="mt-4">
+                        <h5 class="fw-bold mb-3">Key Strengths</h5>
+                        <div class="row g-3">
+                            <div class="col-md-4 col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-code text-primary me-3"></i>
+                                    <span>Full-Stack Development</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-mobile-alt text-primary me-3"></i>
+                                    <span>Mobile App Development</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-laptop text-primary me-3"></i>
+                                    <span>Responsive Web Design</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-database text-primary me-3"></i>
+                                    <span>Backend Integration</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-chart-line text-primary me-3"></i>
+                                    <span>Performance Optimization</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-brain text-primary me-3"></i>
+                                    <span>Continuous Learning</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-pagination"></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="py-5">
+    <div class="container">
+        <h2 class="section-title">Projects</h2>
+        
+        <!-- Project Filters -->
+        <div class="project-filters text-center mb-4">
+            <button class="btn btn-outline-primary me-2 active" data-filter="all">All</button>
+            <button class="btn btn-outline-primary me-2" data-filter="mobile">Mobile</button>
+            <button class="btn btn-outline-primary" data-filter="web fullstack">Web & Full Stack</button>
+        </div>
+
+        <div class="row g-4">
+            <!-- ChatFlare Project -->
+            <div class="col-md-6 project-item" data-category="mobile">
+                <div class="project-card h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold">ChatFlare</h5>
+                            <div class="project-badges">
+                                <span class="badge bg-primary me-1">Kotlin</span>
+                                <span class="badge bg-info">Firebase</span>
+                            </div>
+                        </div>
+                        <p class="mb-4">Android-based social platform connecting users worldwide with real-time messaging and Firebase integration.</p>
+                        <p class="mb-4">Side swip to view different images</p>
+                        
+                        <div class="screenshot-gallery">
+                            <div class="swiper gallery-main">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="src/photo/login.png" class="img-fluid" alt="Chatflare Login">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="src/photo/landingpage.png" class="img-fluid" alt="Chat Interface">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="src/photo/chat.png" class="img-fluid" alt="User Profile">
+                                    </div>   
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-actions mt-3">
+                            <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#chatflareModal">
+                                <i class="fas fa-info-circle me-2"></i>Details
+                            </button>
+                            <a href="appfile/chatFlare.apk" class="btn btn-outline-light" download>
+                                <i class="fas fa-download me-2"></i>Download APK
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-Commerce Dashboard Project -->
+            <div class="col-md-6 project-item" data-category="web fullstack">
+                <div class="project-card h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold">E-Commerce Dashboard</h5>
+                            <div class="project-badges">
+                                <span class="badge bg-success me-1">HTML5</span>
+                                <span class="badge bg-warning">CSS3</span>
+                                <span class="badge bg-primary me-1">Bootstrap</span>
+                                <span class="badge bg-info">JavaScript</span>
+                            </div>
+                        </div>
+                        <p class="mb-4">Comprehensive e-commerce management system with real-time analytics and inventory tracking.</p>
+                        <p class="mb-4">Side swip  to view different images</p>
+                        <div class="screenshot-gallery">
+                            <div class="swiper gallery-commerce">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="src/photo/productlayout.png" class="img-fluid" alt="Dashboard Overview">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="src/photo/salereport.png" class="img-fluid" alt="Sales Analytics">
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-actions mt-3">
+                            <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#commerceModal">
+                                <i class="fas fa-info-circle me-2"></i>Details
+                            </button>
+                            <a href="https://github.com/Aaryan391/EcommerceProject" class="btn btn-outline-light">
+                                <i class="fab fa-github me-2"></i>Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Project Modals -->
+<!-- ChatFlare Modal -->
+<div class="modal fade" id="chatflareModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="modal-title">ChatFlare - Project Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Project Overview</h6>
+                        <p>A mobile messaging application built with Kotlin and Firebase, designed to provide seamless real-time communication.</p>
+                        
+                        <h6 class="mt-3">Key Features</h6>
+                        <ul>
+                            <li>Real-time messaging</li>
+                            <li>User authentication</li>
+                            <li>Profile management</li>
+                            <li>Firebase cloud storage</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Technologies</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Language:</strong> Kotlin</li>
+                            <li><strong>Platform:</strong> Android</li>
+                            <li><strong>Backend:</strong> Firebase</li>
+                            <li><strong>Architecture:</strong> MVVM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- E-Commerce Dashboard Modal -->
+<div class="modal fade" id="commerceModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="modal-title">E-Commerce Dashboard - Project Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Project Overview</h6>
+                        <p>A comprehensive e-commerce management system designed to provide real-time insights into sales, inventory, and business performance.</p>
+                        
+                        <h6 class="mt-3">Key Features</h6>
+                        <ul>
+                            <li>Real-time sales analytics</li>
+                            <li>Inventory tracking</li>
+                            <li>Product management</li>
+                            <li>Interactive dashboard</li>
+                            <li>Responsive design</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Technologies</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Frontend:</strong> HTML5, CSS3, Bootstrap</li>
+                            <li><strong>JavaScript:</strong> Vanilla JS</li>
+                            <li><strong>Charting:</strong> Chart.js</li>
+                            <li><strong>Design:</strong> Responsive Web Design</li>
+                            <li><strong>Architecture:</strong> Single Page Application</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- Skills Section -->
         <section id="skills" class="py-5">
@@ -410,51 +641,147 @@
     <footer>
         <div class="container text-center">
             <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                <a href="https://github.com/Aaryan391" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/aryan.bhattarai.161" class="social-link"><i class="fab fa-facebook"></i></a>
             </div>
-            <p class="mt-4 text-muted">&copy; 2024 Aryan Bhattarai. All rights reserved.</p>
+            <p class="mt-4 "style="color: var(--text)">&copy; 2024 Aryan Bhattarai. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Initialize Swipers
-        const projectSwiper = new Swiper('.project-swiper', {
-            loop: true,
-            slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: { el: '.swiper-pagination', clickable: true },
-            breakpoints: { 768: { slidesPerView: 2 }, 1200: { slidesPerView: 3 } }
-        });
+// Function to initialize gallery for a specific project with enhanced interaction
+function initProjectGallery(gallerySelector, prevBtnSelector, nextBtnSelector) {
+    const galleryContainer = document.querySelector(gallerySelector);
+    const slides = galleryContainer.querySelectorAll('.swiper-slide');
+    const fullImageOverlay = document.createElement('div');
+    
+    // Create full image overlay
+    fullImageOverlay.classList.add('full-image-overlay');
+    fullImageOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
+    
+    const fullImage = document.createElement('img');
+    fullImage.style.cssText = `
+        max-width: 70;
+        max-height: 70%;
+        object-fit: contain;
+    `;
+    
+    fullImageOverlay.appendChild(fullImage);
+    document.body.appendChild(fullImageOverlay);
 
-        const gallerySwiper = new Swiper('.gallery-main', {
-            loop: true,
-            effect: 'coverflow',
-            keyboard: { enabled: true },
-            navigation: {
-                nextEl: '.next-btn',
-                prevEl: '.prev-btn'
-            }
-        });
+    // Swiper initialization
+    const swiper = new Swiper(gallerySelector, {
+        loop: true,
+        effect: 'coverflow',
+        keyboard: { enabled: true },
+        navigation: {
+            nextEl: nextBtnSelector,
+            prevEl: prevBtnSelector
+        },
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true
+        }
+    });
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Add hover and click interactions to slides
+    slides.forEach(slide => {
+        const image = slide.querySelector('img');
+        
+        // Hover effect
+        slide.addEventListener('mouseenter', () => {
+            image.style.transform = 'scale(1.1)';
+            image.style.transition = 'transform 0.3s ease';
+        });
+        
+        slide.addEventListener('mouseleave', () => {
+            image.style.transform = 'scale(1)';
+        });
+        
+        // Full image display on click
+        slide.addEventListener('click', () => {
+            fullImage.src = image.src;
+            fullImageOverlay.style.display = 'flex';
+            setTimeout(() => {
+                fullImageOverlay.style.opacity = '1';
+            }, 10);
+        });
+    });
+
+    // Close full image on overlay click
+    fullImageOverlay.addEventListener('click', (e) => {
+        if (e.target === fullImageOverlay) {
+            fullImageOverlay.style.opacity = '0';
+            setTimeout(() => {
+                fullImageOverlay.style.display = 'none';
+            }, 300);
+        }
+    });
+
+    return swiper;
+}
+
+// Update event listener to initialize galleries with new functionality
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize galleries with new interaction
+    const gallerySelectors = [
+    { gallery: '.gallery-main', prev: '.gallery-main .prev-btn', next: '.gallery-main .next-btn' },
+    { gallery: '.gallery-commerce', prev: '.gallery-commerce .prev-btn', next: '.gallery-commerce .next-btn' }
+];
+
+gallerySelectors.forEach(selector => {
+    initProjectGallery(selector.gallery, selector.prev, selector.next);
+});
+    // Previous project swiper initialization remains the same
+    const projectSwiper = new Swiper('.project-swiper', {
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 30,
+        pagination: { 
+            el: '.swiper-pagination', 
+            clickable: true 
+        },
+        breakpoints: { 
+            768: { slidesPerView: 2 }, 
+            1200: { slidesPerView: 3 } 
+        }
+    });
+    gallerySelectors.forEach(selector => {
+        initProjectGallery(selector.gallery, selector.prev, selector.next);
+    });
+
+    // Project filtering
+    document.querySelectorAll('.project-filters .btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.getAttribute('data-filter');
+            document.querySelectorAll('.project-item').forEach(project => {
+                const category = project.getAttribute('data-category');
+                project.style.display = (filter === 'all' || category.includes(filter)) ? 'block' : 'none';
             });
-        });
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('.navbar');
-            window.scrollY > 50 
-                ? nav.classList.add('navbar-scrolled')
-                : nav.classList.remove('navbar-scrolled');
+            document.querySelector('.project-filters .active').classList.remove('active');
+            button.classList.add('active');
         });
+    });
+});
     </script>
 </body>
 </html>
