@@ -198,32 +198,45 @@
             border-color: var(--primary);
         }
         
-        .gallery-fullscreen-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .gallery-fullscreen-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-        
-        .gallery-fullscreen-image {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
-
+            .gallery-fullscreen-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(15, 23, 42, 0.95);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .gallery-fullscreen-overlay.active {
+                opacity: 1;
+            }
+            
+            .gallery-fullscreen-image {
+                max-width: 90%;
+                max-height: 90vh;
+                object-fit: contain;
+                border-radius: 8px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            
+            .project-item {
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            
+            .swiper-slide {
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+            
+            .swiper-slide:hover {
+                transform: scale(1.02);
+            }
         .thumbnail-container {
             display: flex;
             gap: 0.5rem;
@@ -392,7 +405,8 @@
         <div class="project-filters text-center mb-4">
             <button class="btn btn-outline-primary me-2 active" data-filter="all">All</button>
             <button class="btn btn-outline-primary me-2" data-filter="mobile">Mobile</button>
-            <button class="btn btn-outline-primary" data-filter="web fullstack">Web & Full Stack</button>
+            <button class="btn btn-outline-primary me-2" data-filter="web fullstack">Web & Full Stack</button>
+            <button class="btn btn-outline-primary" data-filter="pcgame">PC Games</button>
         </div>
 
         <div class="row g-4">
@@ -477,6 +491,50 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 project-item" data-category="pcgame">
+                <div class="project-card h-100">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="fw-bold">Slash2D</h5>
+                            <div class="project-badges">
+                                <span class="badge bg-danger me-1">Godot</span>
+                                <span class="badge bg-success">2D RPG</span>
+                            </div>
+                        </div>
+                        <p class="mb-4">An immersive 2D platform RPG game developed using the Godot Engine, featuring dynamic combat and exploration.</p>
+                        <p class="mb-4">Side swipe to view different images</p>
+                        
+                        <div class="screenshot-gallery">
+                            <div class="swiper gallery-slash2d">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="src/photo/Slash2D_Screenshot_1.png" class="img-fluid" alt="Slash2D Gameplay">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="src/photo/Slash2D_Screenshot_2.png" class="img-fluid" alt="Slash2D Combat">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="src/photo/Slash2D_Screenshot_3.png" class="img-fluid" alt="Slash2D Exploration">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="src/photo/Slash2D_Screenshot_4.png" class="img-fluid" alt="Slash2D Environment">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="project-actions mt-3">
+                            <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#slash2dModal">
+                                <i class="fas fa-info-circle me-2"></i>Details
+                            </button>
+                            <a href="" class="btn btn-outline-light" download>
+                                <i class="fas fa-download me-2"></i>Download Game
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -556,7 +614,43 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="slash2dModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="modal-title">Slash2D - Project Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Project Overview</h6>
+                        <p>A 2D platform RPG game developed using Godot Engine, offering an engaging combat system and immersive world exploration.</p>
+                        
+                        <h6 class="mt-3">Key Features</h6>
+                        <ul>
+                            <li>Dynamic combat system</li>
+                            <li>Character progression</li>
+                            <li>Multiple levels and environments</li>
+                            <li>Custom pixel art assets</li>
+                            <li>Engaging storyline</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Technologies</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Engine:</strong> Godot</li>
+                            <li><strong>Language:</strong> GDScript</li>
+                            <li><strong>Graphics:</strong> 2D Pixel Art</li>
+                            <li><strong>Physics:</strong> Built-in Godot Physics</li>
+                            <li><strong>Platform:</strong> Windows PC</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
         <!-- Skills Section -->
         <section id="skills" class="py-5">
             <div class="container">
@@ -651,137 +745,127 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-// Function to initialize gallery for a specific project with enhanced interaction
-function initProjectGallery(gallerySelector, prevBtnSelector, nextBtnSelector) {
-    const galleryContainer = document.querySelector(gallerySelector);
-    const slides = galleryContainer.querySelectorAll('.swiper-slide');
-    const fullImageOverlay = document.createElement('div');
-    
-    // Create full image overlay
-    fullImageOverlay.classList.add('full-image-overlay');
-    fullImageOverlay.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.9);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    `;
-    
-    const fullImage = document.createElement('img');
-    fullImage.style.cssText = `
-        max-width: 70;
-        max-height: 70%;
-        object-fit: contain;
-    `;
-    
-    fullImageOverlay.appendChild(fullImage);
-    document.body.appendChild(fullImageOverlay);
-
-    // Swiper initialization
-    const swiper = new Swiper(gallerySelector, {
-        loop: true,
-        effect: 'coverflow',
-        keyboard: { enabled: true },
-        navigation: {
-            nextEl: nextBtnSelector,
-            prevEl: prevBtnSelector
-        },
-        coverflowEffect: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true
-        }
-    });
-
-    // Add hover and click interactions to slides
-    slides.forEach(slide => {
-        const image = slide.querySelector('img');
-        
-        // Hover effect
-        slide.addEventListener('mouseenter', () => {
-            image.style.transform = 'scale(1.1)';
-            image.style.transition = 'transform 0.3s ease';
-        });
-        
-        slide.addEventListener('mouseleave', () => {
-            image.style.transform = 'scale(1)';
-        });
-        
-        // Full image display on click
-        slide.addEventListener('click', () => {
-            fullImage.src = image.src;
-            fullImageOverlay.style.display = 'flex';
-            setTimeout(() => {
-                fullImageOverlay.style.opacity = '1';
-            }, 10);
-        });
-    });
-
-    // Close full image on overlay click
-    fullImageOverlay.addEventListener('click', (e) => {
-        if (e.target === fullImageOverlay) {
-            fullImageOverlay.style.opacity = '0';
-            setTimeout(() => {
-                fullImageOverlay.style.display = 'none';
-            }, 300);
-        }
-    });
-
-    return swiper;
-}
-
-// Update event listener to initialize galleries with new functionality
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize galleries with new interaction
-    const gallerySelectors = [
-    { gallery: '.gallery-main', prev: '.gallery-main .prev-btn', next: '.gallery-main .next-btn' },
-    { gallery: '.gallery-commerce', prev: '.gallery-commerce .prev-btn', next: '.gallery-commerce .next-btn' }
-];
-
-gallerySelectors.forEach(selector => {
-    initProjectGallery(selector.gallery, selector.prev, selector.next);
-});
-    // Previous project swiper initialization remains the same
-    const projectSwiper = new Swiper('.project-swiper', {
-        loop: true,
-        slidesPerView: 1,
-        spaceBetween: 30,
-        pagination: { 
-            el: '.swiper-pagination', 
-            clickable: true 
-        },
-        breakpoints: { 
-            768: { slidesPerView: 2 }, 
-            1200: { slidesPerView: 3 } 
-        }
-    });
-    gallerySelectors.forEach(selector => {
-        initProjectGallery(selector.gallery, selector.prev, selector.next);
-    });
-
-    // Project filtering
-    document.querySelectorAll('.project-filters .btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const filter = button.getAttribute('data-filter');
-            document.querySelectorAll('.project-item').forEach(project => {
-                const category = project.getAttribute('data-category');
-                project.style.display = (filter === 'all' || category.includes(filter)) ? 'block' : 'none';
+        // Enhanced gallery initialization function
+        function initProjectGallery(gallerySelector) {
+            const swiper = new Swiper(gallerySelector, {
+                loop: true,
+                effect: 'creative',
+                creativeEffect: {
+                    prev: {
+                        translate: ['-20%', 0, -1],
+                        opacity: 0
+                    },
+                    next: {
+                        translate: ['100%', 0, 0],
+                        opacity: 0
+                    }
+                },
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: true
+                },
+                navigation: {
+                    nextEl: `${gallerySelector} .swiper-button-next`,
+                    prevEl: `${gallerySelector} .swiper-button-prev`
+                },
+                pagination: {
+                    el: `${gallerySelector} .swiper-pagination`,
+                    type: 'bullets',
+                    clickable: true
+                },
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true
+                },
+                on: {
+                    click: function(swiper, event) {
+                        const clickedSlide = event.target.closest('.swiper-slide');
+                        if (clickedSlide) {
+                            const image = clickedSlide.querySelector('img');
+                            openFullscreenGallery(image.src);
+                        }
+                    }
+                }
             });
-
-            document.querySelector('.project-filters .active').classList.remove('active');
-            button.classList.add('active');
+        
+            return swiper;
+        }
+        
+        // Fullscreen gallery functionality
+        function openFullscreenGallery(imageSrc) {
+            const overlay = document.createElement('div');
+            overlay.className = 'gallery-fullscreen-overlay';
+            
+            const image = document.createElement('img');
+            image.src = imageSrc;
+            image.className = 'gallery-fullscreen-image';
+            
+            const closeBtn = document.createElement('button');
+            closeBtn.innerHTML = '×';
+            closeBtn.className = 'gallery-close-btn';
+            closeBtn.style.cssText = `
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 40px;
+                cursor: pointer;
+                z-index: 1001;
+            `;
+            
+            overlay.appendChild(image);
+            overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+            
+            setTimeout(() => overlay.classList.add('active'), 10);
+            
+            const closeGallery = () => {
+                overlay.classList.remove('active');
+                setTimeout(() => overlay.remove(), 300);
+            };
+            
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeGallery();
+            });
+            closeBtn.addEventListener('click', closeGallery);
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeGallery();
+            });
+        }
+        
+        // Initialize galleries when document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleries = ['.gallery-main', '.gallery-commerce', '.gallery-slash2d'];
+            galleries.forEach(gallery => initProjectGallery(gallery));
+            
+            // Project filtering with smooth transitions
+            const projectItems = document.querySelectorAll('.project-item');
+            document.querySelectorAll('.project-filters .btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const filter = button.getAttribute('data-filter');
+                    
+                    projectItems.forEach(project => {
+                        const category = project.getAttribute('data-category');
+                        project.style.opacity = '0';
+                        project.style.transform = 'scale(0.95)';
+                        
+                        setTimeout(() => {
+                            project.style.display = (filter === 'all' || category.includes(filter)) ? 'block' : 'none';
+                            requestAnimationFrame(() => {
+                                project.style.opacity = '1';
+                                project.style.transform = 'scale(1)';
+                            });
+                        }, 300);
+                    });
+                    
+                    document.querySelector('.project-filters .active').classList.remove('active');
+                    button.classList.add('active');
+                });
+            });
         });
-    });
-});
-    </script>
+        </script>
 </body>
 </html>
